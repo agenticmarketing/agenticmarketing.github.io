@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MarketingAgents — The playbook for CMOs in the age of AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #111111;
+    --surface-2: #1a1a1a;
+    --border: #262626;
+    --text: #fafafa;
+    --text-dim: #a1a1a1;
+    --text-dimmer: #666666;
+    --accent: #ff4500;
+    --accent-glow: rgba(255, 69, 0, 0.15);
+    --lime: #d4ff00;
+    --blue: #4169ff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Geist', -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- Grid background ---------- */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .content-wrap { position: relative; z-index: 1; }
+
+  /* ---------- Nav ---------- */
+  nav.main-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: -0.02em;
+    cursor: pointer;
+  }
+
+  .logo-mark {
+    width: 28px;
+    height: 28px;
+    background: var(--accent);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Geist Mono', monospace;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--bg);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .logo-mark::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.3) 50%, transparent 60%);
+    animation: shine 3s infinite;
+  }
+
+  @keyframes shine {
+    0%, 100% { transform: translateX(-100%); }
+    50% { transform: translateX(100%); }
+  }
+
+  .logo-text .slash { color: var(--text-dimmer); margin: 0 4px; }
+  .logo-text .accent { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+  }
+
+  .nav-links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a.active { color: var(--text); }
+
+  .cta-button {
+    background: var(--text);
+    color: var(--bg);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+
+  .cta-button:hover {
+    background: var(--accent);
+    color: var(--text);
+    transform: translateY(-1px);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 100px 32px 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-bottom: 32px;
+    background: var(--surface);
+  }
+
+  .hero-tag .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--lime);
+    box-shadow: 0 0 8px var(--lime);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .hero h1 {
+    font-size: clamp(48px, 8vw, 120px);
+    font-weight: 500;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    margin-bottom: 32px;
+    max-width: 1200px;
+  }
+
+  .hero h1 em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 22px;
+    color: var(--text-dim);
+    max-width: 640px;
+    line-height: 1.4;
+    margin-bottom: 40px;
+    font-weight: 400;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 40px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dimmer);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .hero-meta span strong { color: var(--text); font-weight: 500; }
+
+  /* ---------- Featured section ---------- */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 0 32px;
+    max-width: 1400px;
+    margin: 0 auto 32px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .section-label .num {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .featured {
+    padding: 0 32px 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 40px;
+  }
+
+  .featured-hero {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+  }
+
+  .featured-hero:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+  }
+
+  .featured-viz {
+    height: 320px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .featured-viz svg { width: 90%; height: 90%; }
+
+  .featured-body { padding: 32px; }
+
+  .category-pill {
+    display: inline-block;
+    padding: 4px 10px;
+    background: var(--accent-glow);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+  }
+
+  .category-pill.playbooks { background: rgba(212, 255, 0, 0.1); color: var(--lime); border-color: var(--lime); }
+  .category-pill.stack { background: rgba(65, 105, 255, 0.15); color: var(--blue); border-color: var(--blue); }
+  .category-pill.strategy { background: rgba(255, 69, 0, 0.15); color: var(--accent); border-color: var(--accent); }
+  .category-pill.teardown { background: rgba(255, 255, 255, 0.08); color: var(--text); border-color: var(--text-dimmer); }
+
+  .featured-hero h2 {
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+
+  .featured-hero h2 em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+
+  .featured-hero p {
+    color: var(--text-dim);
+    font-size: 16px;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dimmer);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .post-meta .divider { opacity: 0.4; }
+
+  .featured-side {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .side-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex: 1;
+  }
+
+  .side-card:hover {
+    border-color: var(--accent);
+    background: var(--surface-2);
+  }
+
+  .side-card h3 {
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: 10px;
+    margin-top: 12px;
+  }
+
+  .side-card h3 em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .side-card p {
+    color: var(--text-dim);
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  /* ---------- Stats band ---------- */
+  .stats-band {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    margin-bottom: 80px;
+  }
+
+  .stats-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 0 32px;
+  }
+
+  .stat {
+    padding: 40px 24px;
+    border-right: 1px solid var(--border);
+  }
+
+  .stat:last-child { border-right: none; }
+
+  .stat-value {
+    font-size: 48px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 10px;
+    font-family: 'Geist Mono', monospace;
+  }
+
+  .stat-value .unit { color: var(--accent); }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.4;
+  }
+
+  /* ---------- Post grid ---------- */
+  .post-grid {
+    padding: 0 32px 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .post-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .post-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .post-card:hover {
+    border-color: var(--text-dimmer);
+    background: var(--surface-2);
+  }
+
+  .post-card:hover::before { transform: scaleX(1); }
+
+  .post-card-num {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dimmer);
+  }
+
+  .post-card h3 {
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .post-card h3 em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .post-card p {
+    color: var(--text-dim);
+    font-size: 14px;
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  /* ---------- Newsletter CTA ---------- */
+  .newsletter {
+    margin: 0 32px 80px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    background: linear-gradient(135deg, var(--surface) 0%, var(--bg) 100%);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .newsletter::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .newsletter-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+  }
+
+  .newsletter h2 {
+    font-size: 48px;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .newsletter h2 em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+
+  .newsletter p {
+    color: var(--text-dim);
+    font-size: 18px;
+    margin-bottom: 32px;
+    line-height: 1.5;
+  }
+
+  .subscribe-form {
+    display: flex;
+    gap: 12px;
+    max-width: 480px;
+  }
+
+  .subscribe-form input {
+    flex: 1;
+    padding: 14px 20px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .subscribe-form input:focus { border-color: var(--accent); }
+
+  .subscribe-form button {
+    padding: 14px 28px;
+    background: var(--accent);
+    color: var(--text);
+    border: none;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .subscribe-form button:hover { background: #ff5c1f; }
+
+  .newsletter-social-proof {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+    font-size: 13px;
+    color: var(--text-dimmer);
+  }
+
+  .avatars { display: flex; }
+  .avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid var(--bg);
+    margin-left: -8px;
+    background: linear-gradient(135deg, #ff4500, #d4ff00);
+  }
+  .avatar:nth-child(1) { background: linear-gradient(135deg, #4169ff, #d4ff00); margin-left: 0; }
+  .avatar:nth-child(2) { background: linear-gradient(135deg, #ff4500, #ff8c00); }
+  .avatar:nth-child(3) { background: linear-gradient(135deg, #d4ff00, #4169ff); }
+
+  /* ---------- Footer ---------- */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 60px 32px 40px;
+  }
+
+  .footer-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 60px;
+  }
+
+  .footer-brand .logo { margin-bottom: 16px; }
+  .footer-brand p {
+    color: var(--text-dim);
+    font-size: 14px;
+    line-height: 1.5;
+    max-width: 320px;
+  }
+
+  .footer-col h4 {
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+
+  .footer-col a {
+    display: block;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 14px;
+    margin-bottom: 10px;
+    transition: color 0.2s;
+  }
+
+  .footer-col a:hover { color: var(--accent); }
+
+  .footer-bottom {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-top: 30px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dimmer);
+  }
+
+  /* ---------- Post view ---------- */
+  .post-view {
+    display: none;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 60px 32px 100px;
+  }
+
+  .post-view.active { display: block; }
+  .homepage.hidden { display: none; }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 13px;
+    color: var(--text-dim);
+    text-decoration: none;
+    margin-bottom: 40px;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover { color: var(--accent); }
+
+  .post-view h1 {
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin: 20px 0 20px;
+  }
+
+  .post-view h1 em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+
+  .post-view .dek {
+    font-size: 22px;
+    color: var(--text-dim);
+    line-height: 1.4;
+    margin-bottom: 40px;
+  }
+
+  .post-view .meta-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dimmer);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 20px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+  }
+
+  .post-view p {
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+    color: #e5e5e5;
+  }
+
+  .post-view h2 {
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin: 48px 0 20px;
+  }
+
+  .post-view h2 em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .post-view blockquote {
+    border-left: 3px solid var(--accent);
+    padding: 8px 0 8px 24px;
+    margin: 32px 0;
+    font-size: 22px;
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  .post-view ol, .post-view ul {
+    margin: 24px 0 24px 24px;
+    color: #e5e5e5;
+  }
+
+  .post-view li {
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .post-view li strong { color: var(--text); }
+
+  .callout {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--lime);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 32px 0;
+  }
+
+  .callout .label {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    color: var(--lime);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .callout p {
+    margin: 0;
+    font-size: 16px;
+    color: var(--text);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 960px) {
+    .hero { padding: 60px 24px 40px; }
+    .featured { grid-template-columns: 1fr; padding: 0 24px 60px; }
+    .post-grid { grid-template-columns: 1fr; padding: 0 24px 60px; }
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(2) { border-right: none; }
+    .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 1px solid var(--border); }
+    .newsletter { padding: 40px 24px; margin: 0 24px 60px; }
+    .newsletter h2 { font-size: 32px; }
+    .footer-inner { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .nav-links a:not(.cta-button) { display: none; }
+    nav.main-nav { padding: 14px 20px; }
+    .subscribe-form { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<div class="content-wrap">
+<div class="homepage">
+
+<!-- Nav -->
+<nav class="main-nav">
+  <div class="logo" onclick="closePost()">
+    <div class="logo-mark">M</div>
+    <div class="logo-text">Marketing<span class="accent">Agents</span></div>
+  </div>
+  <div class="nav-links">
+    <a href="#" class="active">All</a>
+    <a href="#">Playbooks</a>
+    <a href="#">Stack</a>
+    <a href="#">Strategy</a>
+    <a href="#">Teardowns</a>
+    <button class="cta-button">Subscribe</button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-tag">
+    <span class="dot"></span>
+    <span>New issue · Deploying your first agent</span>
+  </div>
+  <h1>The practical <em>playbook</em> for CMOs in the agent era.</h1>
+  <p class="hero-sub">What to deploy, what to ignore, and how to actually move the numbers. No vendor pitches. No hype. Just what's working in marketing organizations right now.</p>
+  <div class="hero-meta">
+    <span><strong>2.4k</strong> CMOs reading</span>
+    <span><strong>Weekly</strong> dispatch</span>
+    <span><strong>0</strong> sponsored posts</span>
+  </div>
+</section>
+
+<!-- Featured -->
+<div class="section-label">
+  <span class="num">01</span>
+  <span>This Week's Dispatch</span>
+</div>
+
+<section class="featured">
+  <div class="featured-hero" onclick="openPost('firstagent')">
+    <div class="featured-viz">
+      <svg viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="glow1" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#ff4500" stop-opacity="0"/>
+            <stop offset="50%" stop-color="#ff4500" stop-opacity="1"/>
+            <stop offset="100%" stop-color="#ff4500" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="glow2" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#d4ff00" stop-opacity="0"/>
+            <stop offset="50%" stop-color="#d4ff00" stop-opacity="1"/>
+            <stop offset="100%" stop-color="#d4ff00" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <!-- grid -->
+        <g stroke="#262626" stroke-width="0.5" opacity="0.5">
+          <line x1="0" y1="80" x2="600" y2="80"/>
+          <line x1="0" y1="160" x2="600" y2="160"/>
+          <line x1="0" y1="240" x2="600" y2="240"/>
+          <line x1="150" y1="0" x2="150" y2="320"/>
+          <line x1="300" y1="0" x2="300" y2="320"/>
+          <line x1="450" y1="0" x2="450" y2="320"/>
+        </g>
+        <!-- Nodes -->
+        <g>
+          <!-- Input -->
+          <rect x="30" y="140" width="100" height="40" rx="8" fill="#1a1a1a" stroke="#ff4500" stroke-width="1"/>
+          <text x="80" y="165" text-anchor="middle" fill="#ff4500" font-family="Geist Mono, monospace" font-size="11" font-weight="600">CAMPAIGN</text>
+          <!-- Agent -->
+          <circle cx="300" cy="160" r="50" fill="#0a0a0a" stroke="#d4ff00" stroke-width="1.5"/>
+          <circle cx="300" cy="160" r="35" fill="#d4ff00" opacity="0.1"/>
+          <text x="300" y="158" text-anchor="middle" fill="#d4ff00" font-family="Geist Mono, monospace" font-size="11" font-weight="600">AGENT</text>
+          <text x="300" y="172" text-anchor="middle" fill="#666" font-family="Geist Mono, monospace" font-size="9">runtime.v1</text>
+          <!-- Outputs -->
+          <rect x="470" y="60" width="100" height="36" rx="8" fill="#1a1a1a" stroke="#4169ff" stroke-width="1"/>
+          <text x="520" y="83" text-anchor="middle" fill="#4169ff" font-family="Geist Mono, monospace" font-size="10">ADS</text>
+          <rect x="470" y="140" width="100" height="36" rx="8" fill="#1a1a1a" stroke="#4169ff" stroke-width="1"/>
+          <text x="520" y="163" text-anchor="middle" fill="#4169ff" font-family="Geist Mono, monospace" font-size="10">EMAIL</text>
+          <rect x="470" y="220" width="100" height="36" rx="8" fill="#1a1a1a" stroke="#4169ff" stroke-width="1"/>
+          <text x="520" y="243" text-anchor="middle" fill="#4169ff" font-family="Geist Mono, monospace" font-size="10">SOCIAL</text>
+        </g>
+        <!-- Connections -->
+        <g stroke-width="1.5" fill="none">
+          <path d="M 130 160 L 250 160" stroke="url(#glow1)"/>
+          <path d="M 350 160 L 470 78" stroke="url(#glow2)"/>
+          <path d="M 350 160 L 470 158" stroke="url(#glow2)"/>
+          <path d="M 350 160 L 470 238" stroke="url(#glow2)"/>
+        </g>
+        <!-- Pulse dots -->
+        <circle cx="190" cy="160" r="3" fill="#ff4500">
+          <animate attributeName="cx" values="130;250;250" dur="2s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="1;1;0" dur="2s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="410" cy="158" r="3" fill="#d4ff00">
+          <animate attributeName="cx" values="350;470;470" dur="2s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="1;1;0" dur="2s" repeatCount="indefinite"/>
+        </circle>
+      </svg>
+    </div>
+    <div class="featured-body">
+      <span class="category-pill playbooks">Playbook</span>
+      <h2>Your first marketing agent: a <em>90-day</em> deployment plan</h2>
+      <p>A concrete, week-by-week plan for CMOs who want to move from "interesting demo" to production-grade agent that actually touches campaigns. Risks, guardrails, and the three internal fights you'll have.</p>
+      <div class="post-meta">
+        <span>APR 19, 2026</span>
+        <span class="divider">·</span>
+        <span>14 MIN READ</span>
+        <span class="divider">·</span>
+        <span>Issue 14</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="featured-side">
+    <div class="side-card" onclick="openPost('stack')">
+      <span class="category-pill stack">The Stack</span>
+      <h3>The modern marketing agent <em>stack</em>, explained</h3>
+      <p>Orchestration, memory, tools, observability. What each layer actually does and what you're buying when a vendor says "agent platform."</p>
+      <div class="post-meta">
+        <span>9 MIN</span>
+        <span class="divider">·</span>
+        <span>APR 17</span>
+      </div>
+    </div>
+    <div class="side-card" onclick="openPost('budget')">
+      <span class="category-pill strategy">Strategy</span>
+      <h3>How to defend your <em>agent budget</em> to the CFO</h3>
+      <p>The three questions your CFO is going to ask, the answers that actually land, and the one metric that ends the conversation.</p>
+      <div class="post-meta">
+        <span>7 MIN</span>
+        <span class="divider">·</span>
+        <span>APR 15</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Band -->
+<div class="stats-band">
+  <div class="stats-inner">
+    <div class="stat">
+      <div class="stat-value">73<span class="unit">%</span></div>
+      <div class="stat-label">of Fortune 500 marketing orgs piloting agentic tools in 2026</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">4.2<span class="unit">x</span></div>
+      <div class="stat-label">faster campaign launch cycles reported by early adopters</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">$1.8<span class="unit">B</span></div>
+      <div class="stat-label">invested in martech agent platforms over last 12 months</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">11<span class="unit">%</span></div>
+      <div class="stat-label">of those pilots that successfully reach production deployment</div>
+    </div>
+  </div>
+</div>
+
+<!-- Section Label -->
+<div class="section-label">
+  <span class="num">02</span>
+  <span>Recent Dispatches</span>
+</div>
+
+<!-- Post Grid -->
+<section class="post-grid">
+  <div class="post-card" onclick="openPost('teardown')">
+    <div class="post-card-num">// ISSUE 13</div>
+    <span class="category-pill teardown">Teardown</span>
+    <h3>Inside Sephora's <em>agent-run</em> loyalty program</h3>
+    <p>How a beauty retailer replaced 40% of segment-specific email workflows with a single orchestration layer. The results, the trade-offs, and what broke.</p>
+    <div class="post-meta">
+      <span>12 MIN</span>
+      <span class="divider">·</span>
+      <span>APR 12</span>
+    </div>
+  </div>
+
+  <div class="post-card" onclick="openPost('evals')">
+    <div class="post-card-num">// ISSUE 12</div>
+    <span class="category-pill playbooks">Playbook</span>
+    <h3>Evals for marketers: <em>measuring</em> what your agent actually does</h3>
+    <p>You can't manage what you can't measure. A practical framework for evaluating agent performance in a marketing context, borrowed from ML teams.</p>
+    <div class="post-meta">
+      <span>10 MIN</span>
+      <span class="divider">·</span>
+      <span>APR 10</span>
+    </div>
+  </div>
+
+  <div class="post-card" onclick="openPost('brandvoice')">
+    <div class="post-card-num">// ISSUE 11</div>
+    <span class="category-pill strategy">Strategy</span>
+    <h3>Your brand voice is now a <em>config file</em></h3>
+    <p>When the thing writing your copy is a model, the brand guidelines document becomes infrastructure. How leading teams are rethinking voice as code.</p>
+    <div class="post-meta">
+      <span>8 MIN</span>
+      <span class="divider">·</span>
+      <span>APR 8</span>
+    </div>
+  </div>
+
+  <div class="post-card" onclick="openPost('humans')">
+    <div class="post-card-num">// ISSUE 10</div>
+    <span class="category-pill strategy">Strategy</span>
+    <h3>What <em>humans</em> still do better (and it's not what you think)</h3>
+    <p>The org chart of a marketing team in 2027 looks different. Here's what survives, what transforms, and which roles are genuinely going away.</p>
+    <div class="post-meta">
+      <span>11 MIN</span>
+      <span class="divider">·</span>
+      <span>APR 5</span>
+    </div>
+  </div>
+
+  <div class="post-card" onclick="openPost('mcp')">
+    <div class="post-card-num">// ISSUE 09</div>
+    <span class="category-pill stack">The Stack</span>
+    <h3>MCP for marketers: the <em>protocol</em> quietly rewiring your stack</h3>
+    <p>You don't need to know the acronyms. You do need to know why your martech vendors are about to interoperate in ways they never have before.</p>
+    <div class="post-meta">
+      <span>9 MIN</span>
+      <span class="divider">·</span>
+      <span>APR 3</span>
+    </div>
+  </div>
+
+  <div class="post-card" onclick="openPost('risks')">
+    <div class="post-card-num">// ISSUE 08</div>
+    <span class="category-pill teardown">Teardown</span>
+    <h3>The <em>agent mistake</em> that cost one B2B brand $2M</h3>
+    <p>A cautionary tale: an outbound agent went off-script, the legal bills followed. What every CMO should put in their guardrails checklist this quarter.</p>
+    <div class="post-meta">
+      <span>6 MIN</span>
+      <span class="divider">·</span>
+      <span>APR 1</span>
+    </div>
+  </div>
+</section>
+
+<!-- Newsletter -->
+<section class="newsletter">
+  <div class="newsletter-inner">
+    <h2>Get the <em>Monday briefing</em>.</h2>
+    <p>Every Monday at 6am ET. One deployment playbook, one teardown, one thing to ignore this week. Read in five minutes. Built for CMOs and marketing leaders.</p>
+    <form class="subscribe-form" onsubmit="handleSubscribe(event)">
+      <input type="email" placeholder="your@company.com" required>
+      <button type="submit">Subscribe free</button>
+    </form>
+    <div class="newsletter-social-proof">
+      <div class="avatars">
+        <div class="avatar"></div>
+        <div class="avatar"></div>
+        <div class="avatar"></div>
+      </div>
+      <span>Joining CMOs from Unilever, Shopify, Notion, Canva, and 200+ others</span>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo">
+        <div class="logo-mark">M</div>
+        <div class="logo-text">Marketing<span class="accent">Agents</span></div>
+      </div>
+      <p>The practical playbook for marketing leaders deploying agentic AI. Independent. No vendor sponsorships.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Sections</h4>
+      <a href="#">Playbooks</a>
+      <a href="#">The Stack</a>
+      <a href="#">Strategy</a>
+      <a href="#">Teardowns</a>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <a href="#">Archive</a>
+      <a href="#">Agent Glossary</a>
+      <a href="#">Vendor Map</a>
+      <a href="#">RSS</a>
+    </div>
+    <div class="footer-col">
+      <h4>About</h4>
+      <a href="#">Contact</a>
+      <a href="#">Masthead</a>
+      <a href="#">Advertise</a>
+      <a href="#">Ethics</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 MARKETINGAGENTS</span>
+    <span>BUILT FOR CMOS · SHIPPED FROM NYC</span>
+  </div>
+</footer>
+
+</div>
+
+<!-- Post: First Agent -->
+<article class="post-view" id="post-firstagent">
+  <a class="back-link" onclick="closePost()">← Back to issue</a>
+  <span class="category-pill playbooks">Playbook</span>
+  <h1>Your first marketing agent: a <em>90-day</em> deployment plan</h1>
+  <p class="dek">A concrete, week-by-week plan for CMOs who want to move from "interesting demo" to production-grade agent that actually touches campaigns.</p>
+  <div class="meta-bar">
+    <span>BY THE EDITORS</span>
+    <span>APR 19, 2026 · 14 MIN READ</span>
+  </div>
+  <p>Every CMO has sat through the demo. A slick interface, an impressive response, a founder who keeps saying "agentic." You walk out thinking one of two things: this is going to change everything, or this is going to flame out the second it meets the actual mess of your marketing org. Usually both.</p>
+  <p>The truth is that almost nobody is deploying agents well yet. The 11% production-success rate in our opening stat isn't a critique of the technology — it's a critique of the rollout. Teams skip the boring parts. They pick the wrong first use case. They don't define what "done" looks like. Here is a plan that avoids the most common ways this goes sideways.</p>
+
+  <h2>Days 1–30: <em>Pick the right wedge</em></h2>
+  <p>The first job is not to deploy an agent. It is to pick the right one. The wedge use case has three properties, and if your pick is missing any of them, start over.</p>
+  <ol>
+    <li><strong>High volume, low stakes.</strong> You want a task your team does 50+ times a week where a mistake is recoverable. Campaign naming conventions. First-pass email subject lines. Asset tagging. Save the board-facing work for year two.</li>
+    <li><strong>Clearly measurable.</strong> You need a before/after number. Time-to-launch, cost-per-brief, error rate on tagging. If you can't graph it, you can't defend it.</li>
+    <li><strong>A human owner who wants this to work.</strong> Not just tolerates. Wants. Find your most bought-in manager and make them the pilot lead.</li>
+  </ol>
+
+  <div class="callout">
+    <div class="label">Field note</div>
+    <p>The single biggest predictor of success in our interviews wasn't the tech stack or the budget. It was whether the first human user was enthusiastic or conscripted.</p>
+  </div>
+
+  <h2>Days 31–60: <em>Build the guardrails</em></h2>
+  <p>Now the boring work. Guardrails are what separate an agent that ships from an agent that becomes a cautionary tale at an industry conference. You need four things before anything goes live.</p>
+  <p><strong>Scope limits.</strong> Explicit, written-down limits on what the agent is and isn't allowed to do. Channels, audiences, spend thresholds, approval gates. "Can draft, cannot send" is a legitimate configuration.</p>
+  <p><strong>Human-in-the-loop checkpoints.</strong> Define exactly where a human has to sign off. Every email? Every campaign above a dollar threshold? Every piece of content that names a competitor? Make it explicit.</p>
+  <p><strong>Rollback plan.</strong> Every deployed agent needs an off-switch that can be thrown in under five minutes by someone who is not a technical expert. If the answer is "file a ticket," you don't have a rollback plan.</p>
+  <p><strong>Logging you can actually read.</strong> Not just raw logs. A daily or weekly summary your pilot lead can skim in ten minutes. What did the agent do. What did it refuse to do. What went weird.</p>
+
+  <blockquote>If you remember nothing else: the guardrails are not a constraint on the agent. They are the thing that lets you defend the agent when the first bad output lands on someone's desk. And one will.</blockquote>
+
+  <h2>Days 61–90: <em>Ship, measure, expand</em></h2>
+  <p>Production deployment. A narrow scope, a real workflow, a measurement baseline you captured before you started. Run it for a full month before you touch anything. Teams that expand scope in week two regret it in week four.</p>
+  <p>At day 90, you are writing a one-page memo. It answers four questions:</p>
+  <ul>
+    <li><strong>What did it do?</strong> The concrete tasks completed, with volume.</li>
+    <li><strong>What did it save?</strong> Time, cost, or error rate, versus baseline.</li>
+    <li><strong>Where did it fail?</strong> Honest. Be specific about the failure modes.</li>
+    <li><strong>What's next?</strong> One expansion — either deeper (more of this task) or adjacent (a closely related task).</li>
+  </ul>
+  <p>That memo is the thing you take to your CFO, your CEO, your board. It is also the thing you reuse as the template for your second deployment, and your third. Agent adoption inside an organization compounds, but only if you build the habit of writing the memo.</p>
+
+  <div class="callout">
+    <div class="label">The meta-point</div>
+    <p>The agents themselves are getting dramatically better every six months. The bottleneck is organizational: your ability to pick wedge use cases, build guardrails, measure honestly, and expand from there. That's the capability that compounds.</p>
+  </div>
+
+  <p>Next week's dispatch: the vendor landscape, and how to read an agent platform RFP without getting snowed.</p>
+</article>
+
+<!-- Other post placeholders -->
+<article class="post-view" id="post-stack">
+  <a class="back-link" onclick="closePost()">← Back to issue</a>
+  <span class="category-pill stack">The Stack</span>
+  <h1>The modern marketing agent <em>stack</em>, explained</h1>
+  <p class="dek">Orchestration, memory, tools, observability. What each layer actually does and what you're buying when a vendor says "agent platform."</p>
+  <div class="meta-bar"><span>BY THE EDITORS</span><span>APR 17, 2026 · 9 MIN READ</span></div>
+  <p>Every week, a new "agent platform" launches with a press release that makes it sound like the whole stack in one box. Some of them are. Most of them are one layer of the stack pretending to be the whole thing. Here's how to tell the difference.</p>
+  <h2>The four layers that actually matter</h2>
+  <p>Underneath the marketing-speak, every production-grade marketing agent system has four distinct layers. You can build them yourselves, buy them bundled, or — what most teams actually do — mix and match. Knowing which layer you're shopping for makes every vendor conversation shorter.</p>
+  <p><strong>1. The model layer.</strong> The brain. Usually one of the frontier model providers, sometimes a smaller fine-tuned model for specific tasks. This is rarely where you should optimize first; model quality is increasing fast enough that the right choice today will be wrong in nine months anyway.</p>
+  <p><strong>2. The orchestration layer.</strong> The loop. Turns a model into an agent by handling the plan-act-observe cycle, managing tool calls, retrying on failure. This is where most "agent platforms" actually live.</p>
+  <p><strong>3. The tools layer.</strong> Everything the agent can touch. Your CRM, your CMS, your ad platform, your email system. The interoperability revolution happening here — protocols like MCP — is the most underrated story in martech right now.</p>
+  <p><strong>4. The observability layer.</strong> What your agent did, why, and whether it was any good. This is the layer most teams skip and most regret skipping. Without it, you cannot improve, defend, or debug.</p>
+  <p>More next week on how to evaluate vendors layer by layer.</p>
+</article>
+
+<article class="post-view" id="post-budget">
+  <a class="back-link" onclick="closePost()">← Back to issue</a>
+  <span class="category-pill strategy">Strategy</span>
+  <h1>How to defend your <em>agent budget</em> to the CFO</h1>
+  <p class="dek">The three questions your CFO is going to ask, the answers that actually land, and the one metric that ends the conversation.</p>
+  <div class="meta-bar"><span>BY THE EDITORS</span><span>APR 15, 2026 · 7 MIN READ</span></div>
+  <p>The conversation with finance is not going to be about AI. It is going to be about whether the line item you're proposing has a defensible return. CFOs are not anti-AI. They are anti-ambiguous-spend. Treat the conversation accordingly.</p>
+  <h2>The three questions, and what to say</h2>
+  <p><strong>"What does this replace?"</strong> The worst answer is "nothing, it's additive." The best answer names a specific cost — agency hours, contractor spend, a tool you can sunset, or FTE capacity that can be redirected to higher-leverage work.</p>
+  <p><strong>"How do we know it's working?"</strong> Have one primary metric, with a baseline captured before you started. Not three. Not a dashboard. One number, measured consistently.</p>
+  <p><strong>"What's the risk?"</strong> Name the downside before they do. Compliance risk, brand risk, vendor lock-in — and what you're doing about each. CFOs trust people who already thought of the bad case.</p>
+  <blockquote>The metric that ends the conversation is not ROI. It is payback period. CFOs have a number in their head for how long they're willing to wait. Meet it, and the rest is paperwork.</blockquote>
+</article>
+
+<article class="post-view" id="post-teardown">
+  <a class="back-link" onclick="closePost()">← Back to issue</a>
+  <span class="category-pill teardown">Teardown</span>
+  <h1>Inside Sephora's <em>agent-run</em> loyalty program</h1>
+  <p class="dek">How a beauty retailer replaced 40% of segment-specific email workflows with a single orchestration layer.</p>
+  <div class="meta-bar"><span>BY THE EDITORS</span><span>APR 12, 2026 · 12 MIN READ</span></div>
+  <p>This is an illustrative teardown based on public reporting and industry interviews. A full case study is forthcoming — subscribe for the expanded version.</p>
+  <p>The short version: a major beauty retailer's loyalty team had accumulated, over roughly seven years, around 140 distinct email workflows. Different segments. Different triggers. Different copy variants. Different people owning each one. Maintaining them had become its own full-time job for two people.</p>
+  <p>They consolidated. Not by deleting workflows, but by replacing the hand-tuned branching logic with a single orchestration layer that decides, per customer, which message should go when. Fewer workflows to maintain. More personalization per customer. The team of two now oversees the agent rather than maintaining the workflows.</p>
+  <h2>What broke</h2>
+  <p>The first six weeks were rough. The agent made sensible-looking choices that were slightly off-brand in ways that were hard to articulate but obvious to the brand team. Fixing this required writing down brand voice rules that had, until then, lived entirely in one senior person's head. That documentation turned out to be more valuable than the agent itself.</p>
+  <p>More teardowns coming. If you're running something like this and want to share, reply to any newsletter.</p>
+</article>
+
+<article class="post-view" id="post-evals">
+  <a class="back-link" onclick="closePost()">← Back to issue</a>
+  <span class="category-pill playbooks">Playbook</span>
+  <h1>Evals for marketers: <em>measuring</em> what your agent actually does</h1>
+  <p class="dek">You can't manage what you can't measure. A practical framework for evaluating agent performance in a marketing context.</p>
+  <div class="meta-bar"><span>BY THE EDITORS</span><span>APR 10, 2026 · 10 MIN READ</span></div>
+  <p>ML teams have been running "evals" — systematic tests of model behavior — for years. Marketing teams haven't, and it's starting to show. Here's how to borrow the practice without borrowing the jargon.</p>
+  <h2>The three-tier eval system</h2>
+  <p><strong>Tier 1: Does it work at all?</strong> Ten canonical inputs, ten expected outputs. Run daily. Breaks if the agent starts producing nonsense.</p>
+  <p><strong>Tier 2: Is it on-brand?</strong> A larger sample, reviewed weekly by a human, scored on a simple rubric. Catches drift.</p>
+  <p><strong>Tier 3: Is it moving the number?</strong> The business metric you picked in your 90-day plan. Reviewed monthly. This is the one that determines whether the agent stays deployed.</p>
+  <p>Full framework and templates in next week's expanded guide.</p>
+</article>
+
+<article class="post-view" id="post-brandvoice">
+  <a class="back-link" onclick="closePost()">← Back to issue</a>
+  <span class="category-pill strategy">Strategy</span>
+  <h1>Your brand voice is now a <em>config file</em></h1>
+  <p class="dek">When the thing writing your copy is a model, the brand guidelines document becomes infrastructure.</p>
+  <div class="meta-bar"><span>BY THE EDITORS</span><span>APR 8, 2026 · 8 MIN READ</span></div>
+  <p>For most of the last thirty years, the brand guidelines document was a PDF. Sometimes beautiful, often ignored, mostly consulted during onboarding and then forgotten. Its primary job was to align humans.</p>
+  <p>That job just got a second, more literal customer: the model writing on your behalf. And models, unlike humans, read every word of the document every single time they generate copy. A vague guideline produces vague output. A precise one produces precise output. Your brand guidelines have quietly become code.</p>
+  <h2>What this changes</h2>
+  <p>Three things. First, the document gets shorter and more specific. Vibes don't compile. Second, it gets versioned. You'll want to know what guidelines produced what output when something goes wrong. Third, ownership shifts — the brand team now partners with whoever deploys the agent, because the guidelines are now a dependency.</p>
+  <p>More on practical guideline-writing for agents in a future dispatch.</p>
+</article>
+
+<article class="post-view" id="post-humans">
+  <a class="back-link" onclick="closePost()">← Back to issue</a>
+  <span class="category-pill strategy">Strategy</span>
+  <h1>What <em>humans</em> still do better (and it's not what you think)</h1>
+  <p class="dek">The org chart of a marketing team in 2027 looks different. Here's what survives, what transforms, and which roles are genuinely going away.</p>
+  <div class="meta-bar"><span>BY THE EDITORS</span><span>APR 5, 2026 · 11 MIN READ</span></div>
+  <p>The honest answer is that creativity isn't the differentiator most people think it is. Models are genuinely creative, in the sense that matters for most marketing work. What humans still do better is a narrower and more interesting list.</p>
+  <h2>The short list</h2>
+  <p><strong>Taste with stakes.</strong> Making the final call when the decision is irreversible and the model's confidence is high but wrong.</p>
+  <p><strong>Reading a room.</strong> Negotiating with a CFO, reassuring a skeptical team, sensing when a campaign is landing wrong with a specific audience.</p>
+  <p><strong>Being accountable.</strong> When something goes wrong, an agent cannot be fired, demoted, or promoted. Someone has to own the outcome.</p>
+  <p>The roles that grow are the ones organized around these capabilities. The roles that shrink are the ones organized around execution volume.</p>
+</article>
+
+<article class="post-view" id="post-mcp">
+  <a class="back-link" onclick="closePost()">← Back to issue</a>
+  <span class="category-pill stack">The Stack</span>
+  <h1>MCP for marketers: the <em>protocol</em> quietly rewiring your stack</h1>
+  <p class="dek">You don't need to know the acronyms. You do need to know why your martech vendors are about to interoperate in ways they never have before.</p>
+  <div class="meta-bar"><span>BY THE EDITORS</span><span>APR 3, 2026 · 9 MIN READ</span></div>
+  <p>Every twenty years or so, a boring technical standard shows up and quietly reorganizes an industry. USB did it. HTTP did it. OAuth did it. MCP — the Model Context Protocol — is the strongest candidate to do it for the AI-plus-everything-else era we're in now.</p>
+  <h2>Why it matters to your stack</h2>
+  <p>The short version: for the first time, the bridge between an AI model and an external tool is standardized. Your CRM, your CMS, your analytics platform — as they adopt MCP, any agent can use any tool without bespoke integration work. The martech bundle you've been locked into for years is about to become much less sticky.</p>
+  <p>The implication for CMOs is simple: stop signing multi-year all-in-one martech deals in 2026. The value of interoperability is going up fast, and the lock-in is going down.</p>
+</article>
+
+<article class="post-view" id="post-risks">
+  <a class="back-link" onclick="closePost()">← Back to issue</a>
+  <span class="category-pill teardown">Teardown</span>
+  <h1>The <em>agent mistake</em> that cost one B2B brand $2M</h1>
+  <p class="dek">A cautionary tale: an outbound agent went off-script, the legal bills followed.</p>
+  <div class="meta-bar"><span>BY THE EDITORS</span><span>APR 1, 2026 · 6 MIN READ</span></div>
+  <p>An illustrative composite of three incidents our reporting surfaced this quarter. Identifying details have been changed.</p>
+  <p>The setup was sensible. An outbound sales agent, scoped to email only, drafting personalized opening messages for a named-account list. Human approval in the loop for the first two months. After a clean track record, approval was removed from a subset of "low-risk" segments.</p>
+  <p>The mistake was in the definition of "low-risk." A segment that had been low-risk during the pilot included, after a CRM sync, a small number of accounts in a regulated industry where unsolicited outreach had specific legal constraints. The agent, doing exactly what it had been trained to do, sent the emails. Legal bills followed.</p>
+  <h2>The lesson</h2>
+  <p>The failure wasn't the agent's. It was the definition of the segment it was allowed to operate on. Guardrails that don't get reviewed when their inputs change aren't guardrails. They're decorations.</p>
+</article>
+
+</div>
+</div>
+
+<script>
+  function openPost(id) {
+    document.querySelector('.homepage').classList.add('hidden');
+    document.querySelectorAll('.post-view').forEach(p => p.classList.remove('active'));
+    const el = document.getElementById('post-' + id);
+    if (el) el.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  function closePost() {
+    document.querySelector('.homepage').classList.remove('hidden');
+    document.querySelectorAll('.post-view').forEach(p => p.classList.remove('active'));
+    window.scrollTo(0, 0);
+  }
+
+  function handleSubscribe(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    const original = btn.textContent;
+    btn.textContent = '✓ Subscribed';
+    btn.style.background = '#d4ff00';
+    btn.style.color = '#0a0a0a';
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.style.background = '';
+      btn.style.color = '';
+      e.target.reset();
+    }, 2500);
+  }
+</script>
+
+</body>
+</html>
